@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "637819159613",
+    "firebase_url": "https://studyhours-52945.firebaseio.com",
+    "project_id": "studyhours-52945",
+    "storage_bucket": "studyhours-52945.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637819159613:android:15278969f5256739679654",
+        "android_client_info": {
+          "package_name": "com.example.studyhours"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637819159613-09pk3ho9hdqg9ah8953hpauj4otugv3o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.studyhours",
+            "certificate_hash": "567b8e84ff5bd769050458fb309e9b6bc8e2b4c4"
+          }
+        },
+        {
+          "client_id": "637819159613-29q9hjuhcn6pl3dt5kunqfvhk8imor69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNCAI33I2a8CuPVjXR3aniDdXbKskm0is"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637819159613-29q9hjuhcn6pl3dt5kunqfvhk8imor69.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
