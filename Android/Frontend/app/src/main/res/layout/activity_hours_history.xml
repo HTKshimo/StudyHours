@@ -7,6 +7,4 @@
     tools:context=".HoursHistory"
     android:id="@+id/hoursHistoryScreen">
 
-    <include layout="@layout/toolbar"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
