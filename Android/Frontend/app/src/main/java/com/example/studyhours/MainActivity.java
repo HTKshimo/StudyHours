@@ -7,6 +7,7 @@ import com.example.studyhours.ui.gallery.GalleryFragment;
 import com.example.studyhours.ui.home.HomeFragment;
 import com.google.android.gms.auth.api.Auth;
 
+import android.util.Pair;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -29,6 +30,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -100,6 +104,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 //        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 //        displayView(R.id.nav_record);
+
+
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference();
+//        myRef.setValue(new Pair<>(1, 2));
     }
 
     @Override
@@ -140,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = new HomeFragment();
             title  = "Record Hours";
         }else if (id == R.id.nav_history){
+            //if admin, open Sisters Hours Fragment, else open Gallery fragment
             fragment = new GalleryFragment();
             title  = "Hours History";
         }
