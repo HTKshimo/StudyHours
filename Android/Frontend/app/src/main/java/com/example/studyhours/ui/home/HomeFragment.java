@@ -20,7 +20,7 @@ import com.example.studyhours.R;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+//    private HomeViewModel homeViewModel;
     private Chronometer chronometer;
     private ToggleButton recordButton;
     private Boolean inherited = false;
@@ -55,8 +55,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
+//        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.activity_main, container, false);
 //        final TextView textView = root.findViewById(R.id.text_home);
 //        homeViewModel.getText().observe(this, new Observer<String>() {
