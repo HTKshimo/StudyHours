@@ -16,16 +16,24 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.studyhours.Admin;
 import com.example.studyhours.R;
+import com.example.studyhours.StudySession;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeFragment extends Fragment {
 
-//    private HomeViewModel homeViewModel;
+    private HomeViewModel homeViewModel;
     private Chronometer chronometer;
     private ToggleButton recordButton;
-    private Boolean inherited = false;
-    private Boolean WasRunning = false;
-    private Long stopOffset = 0L;
+    private boolean inherited = false;
+    private boolean WasRunning = false;
+    private long stopOffset = 0L;
+    private long checkIn;
+    private StudySession studySession;
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -34,6 +42,7 @@ public class HomeFragment extends Fragment {
         savedInstanceState.putLong("clock", chronometer.getBase());
         savedInstanceState.putBoolean("running", recordButton.isChecked());
         savedInstanceState.putLong("offset", stopOffset);
+        savedInstanceState.putLong("checkIn", checkIn);
         System.out.println("OFFSET SAVED: " + stopOffset);
     }
 
@@ -44,11 +53,14 @@ public class HomeFragment extends Fragment {
             inherited = true;
             WasRunning = savedInstanceState.getBoolean("running");
             stopOffset = savedInstanceState.getLong("offset");
+            checkIn = savedInstanceState.getLong("checkIn");
             if(WasRunning){
                 chronometer.setBase(savedInstanceState.getLong("clock"));
+                studySession = new StudySession();
+                studySession.setIn(checkIn);
             }else{
-                chronometer.setBase(SystemClock.elapsedRealtime() - savedInstanceState.getLong("offset"));
-                System.out.println("CLOCK SET: "+(SystemClock.elapsedRealtime() - savedInstanceState.getLong("offset")));
+                chronometer.setBase(SystemClock.elapsedRealtime() - stopOffset);
+                System.out.println("CLOCK SET: "+(SystemClock.elapsedRealtime() - stopOffset));
             }
         }
     }
@@ -74,12 +86,26 @@ public class HomeFragment extends Fragment {
                     // The toggle is enabled
                     if (!inherited || !WasRunning){
                         chronometer.setBase(SystemClock.elapsedRealtime());
+                        studySession = new StudySession();
+                        checkIn = studySession.getIn();
                     }
                     chronometer.start();
                 } else {
                     // The toggle is disabled
                     chronometer.stop();
                     stopOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
+
+                    studySession.setOut();
+                    FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+                    FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference usersRef = database.getReference("hours").child(mFirebaseUser.getUid());
+                    usersRef.child("test").setValue(studySession);
+                    usersRef = usersRef.child("total");
+//                    usersRef.setValue(usersRef.get);
+
+                    //TODO: check if duration >= 30mins
+
                     //TODO: popup ask if would like to submit
                 }
                 inherited = false;

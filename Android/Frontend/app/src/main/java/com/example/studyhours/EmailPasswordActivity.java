@@ -32,6 +32,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class EmailPasswordActivity extends BaseActivity implements
         View.OnClickListener {
@@ -42,6 +48,7 @@ public class EmailPasswordActivity extends BaseActivity implements
     private TextView mDetailTextView;
     private EditText mEmailField;
     private EditText mPasswordField;
+    private EditText mDisplayName; //Sister Nickname
 
     // [START declare_auth]
     private FirebaseAuth mAuth;
@@ -57,6 +64,7 @@ public class EmailPasswordActivity extends BaseActivity implements
         mDetailTextView = findViewById(R.id.detail);
         mEmailField = findViewById(R.id.fieldEmail);
         mPasswordField = findViewById(R.id.fieldPassword);
+        mDisplayName = findViewById(R.id.fieldDisplayName);
         setProgressBar(R.id.progressBar);
 
         // Buttons
@@ -98,7 +106,30 @@ public class EmailPasswordActivity extends BaseActivity implements
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(mDisplayName.getText().toString()).build();
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()) {
+                                                Log.d(TAG, "User display_name added");
+                                            }
+                                        }
+                                    });
+
+                            //add admin status to db
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference usersRef = database.getReference().child("users");
+                            Admin admin = new Admin(false); //TODO: logic for admin
+                            usersRef.child(user.getUid()).setValue(admin);
+                            usersRef = database.getReference("hours/"+user.getUid());
+                            usersRef.child("totalHours").setValue(0);
+                            usersRef.child("numSessions").setValue(0);
+
                             updateUI(user);
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());

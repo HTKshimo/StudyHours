@@ -34,6 +34,9 @@ import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -106,9 +109,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        displayView(R.id.nav_record);
 
 
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference();
-//        myRef.setValue(new Pair<>(1, 2));
     }
 
     @Override
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = new HomeFragment();
             title  = "Record Hours";
         }else if (id == R.id.nav_history){
-            //if admin, open Sisters Hours Fragment, else open Gallery fragment
+            //if com.example.studyhours.admin, open Sisters Hours Fragment, else open Gallery fragment
             fragment = new GalleryFragment();
             title  = "Hours History";
         }
