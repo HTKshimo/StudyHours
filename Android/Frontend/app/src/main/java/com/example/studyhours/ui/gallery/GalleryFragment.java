@@ -16,36 +16,82 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.studyhours.CustomListAdapter;
 import com.example.studyhours.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 
+import java.math.RoundingMode;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
     private ListView listView;
-    private ArrayList<String> hourArray;
+    private TextView totalHoursText;
     private ArrayList<String> infoArray;
+    private float totalHours;
+    private HashMap<Integer, String> map;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel =
                 ViewModelProviders.of(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.activity_hours_history, container, false);
-
-        hourArray = new ArrayList<>();
-        String[] tempHourArray = {"test1","test2","test3"};
-        for (String s : tempHourArray){
-            hourArray.add(s);
-        }
+        final View root = inflater.inflate(R.layout.activity_hours_history, container, false);
+        totalHoursText = root.findViewById(R.id.total_hours);
         infoArray = new ArrayList<>();
-        String[] tempInfoArray = {"MM/DD/YY HH:MM - HH:MM","MM/DD/YY HH:MM - DD HH:MM","MM/DD/YY HH:MM - DD HH:MM"};
-        for (String s : tempInfoArray){
-            infoArray.add(s);
-        }
+        map = new HashMap<>();
 
-        CustomListAdapter customListAdapter = new CustomListAdapter(this.getActivity(), hourArray, infoArray);
-        listView = root.findViewById(R.id.simpleListView);
-        listView.setAdapter(customListAdapter);
+        final FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference usersRef = database.getReference("hours/"+mFirebaseUser.getUid());
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long in, out;
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+
+                    if (child.getKey().equals("totalHours")){
+                        System.out.println("child.getKey().equals(\"totalHours\")");
+                        totalHours = child.getValue(Float.class);
+                        totalHoursText.setText(getString(R.string.total_hours, totalHours));
+                    }else if(!child.getKey().equals("numSessions")){
+                        System.out.println("!child.getKey().equals(\"numSessions\")");
+                        in = child.child("in").getValue(Long.class);
+                        out = child.child("out").getValue(Long.class);
+                        String inS = new SimpleDateFormat("MM/dd/yyyy HH:mm").format(new Timestamp(in));
+                        String outS = new SimpleDateFormat("MM/dd/yyyy HH:mm").format(new Timestamp(out));
+                        String temp = inS + " - " + outS;
+                        //order the arraylist in chronological order
+                        map.put(Integer.valueOf(child.getKey()), temp);
+                    }
+                }
+                SortedSet<Integer> keys = new TreeSet<>(map.keySet());
+                for (int key : keys) {
+                    infoArray.add(map.get(key));
+//                    System.out.println("key: "+key);
+                }
+                CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), infoArray);
+                listView = root.findViewById(R.id.simpleListView);
+                listView.setAdapter(customListAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         return root;
     }

@@ -33,8 +33,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,6 +52,7 @@ public class EmailPasswordActivity extends BaseActivity implements
     private EditText mEmailField;
     private EditText mPasswordField;
     private EditText mDisplayName; //Sister Nickname
+    private EditText mAdminCode;
 
     // [START declare_auth]
     private FirebaseAuth mAuth;
@@ -65,6 +69,8 @@ public class EmailPasswordActivity extends BaseActivity implements
         mEmailField = findViewById(R.id.fieldEmail);
         mPasswordField = findViewById(R.id.fieldPassword);
         mDisplayName = findViewById(R.id.fieldDisplayName);
+        mAdminCode = findViewById(R.id.adminCode);
+
         setProgressBar(R.id.progressBar);
 
         // Buttons
@@ -97,53 +103,77 @@ public class EmailPasswordActivity extends BaseActivity implements
 
         showProgressBar();
 
-        // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(mDisplayName.getText().toString()).build();
-                            user.updateProfile(profileUpdates)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()) {
-                                                Log.d(TAG, "User display_name added");
+        if (password.length() < 6){
+            Toast.makeText(EmailPasswordActivity.this, "Password needs to be at least 6 characters",
+                    Toast.LENGTH_SHORT).show();
+        }else {
+
+            // [START create_user_with_email]
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "createUserWithEmail:success");
+                                final FirebaseUser user = mAuth.getCurrentUser();
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(mDisplayName.getText().toString()).build();
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.d(TAG, "User display_name added");
+                                                }
                                             }
+                                        });
+
+                                //add admin status to db
+                                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                final DatabaseReference usersRef = database.getReference();
+                                final long adminCode = Long.valueOf(mAdminCode.getText().toString());
+                                usersRef.child("adminCode").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        boolean temp = false;
+                                        if(adminCode == dataSnapshot.getValue(Long.class)){
+                                            temp = true;
                                         }
-                                    });
+                                        Admin admin = new Admin(temp);
+                                        usersRef.child("users").child(user.getUid()).setValue(admin);
+                                    }
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
 
-                            //add admin status to db
-                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            DatabaseReference usersRef = database.getReference().child("users");
-                            Admin admin = new Admin(false); //TODO: logic for admin
-                            usersRef.child(user.getUid()).setValue(admin);
-                            usersRef = database.getReference("hours/"+user.getUid());
-                            usersRef.child("totalHours").setValue(0);
-                            usersRef.child("numSessions").setValue(0);
+                                    }
+                                });
+                                 //TODO: logic for admin
 
-                            updateUI(user);
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            finish();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                                usersRef.child("hours/" + user.getUid()).child("totalHours").setValue(0);
+                                usersRef.child("hours/" + user.getUid()).child("numSessions").setValue(0);
+                                usersRef.child("hours/" + user.getUid()).child("sisterName").setValue(mDisplayName.getText().toString());
+
+                                updateUI(user);
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                finish();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+
+                                Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+
+                                updateUI(null);
+                            }
+
+                            // [START_EXCLUDE]
+                            hideProgressBar();
+                            // [END_EXCLUDE]
                         }
-
-                        // [START_EXCLUDE]
-                        hideProgressBar();
-                        // [END_EXCLUDE]
-                    }
-                });
-        // [END create_user_with_email]
+                    });
+            // [END create_user_with_email]
+        }
     }
 
     private void signIn(String email, String password) {

@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">StudyHours</string>
-    <string name="greeting">Greetings sister! \n  As a reminder, you need to complete 10 hrs study hours each semester. Only sessions longer than 30 minutes will count. Click the start button to start recording.</string>
+    <string name="greeting">Greetings sister! \nHere are some reminders: \n
+        1. Click on the start button to start recording and stop to finish recording.\n
+        2. Once you start recording, DO NOT navigate to other pages in THIS app. You can let the app run in the background and use your phone as normal.\n
+        3. Only sessions longer than 30 minutes will count.
+        4. You need to complete 10 hrs study hours each semester. </string>
     <string name="title_activity_navigation">NavigationActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -11,6 +15,7 @@
 
     <string name="menu_record">Record Hours</string>
     <string name="menu_history">My Hours History</string>
+    <string name="menu_sisters">All Sisters Hours</string>
     <string name="menu_logout">Log Out</string>
 
 
@@ -40,8 +45,11 @@
 
     <string name="label_generic_idp">Generic OAuth</string>
     <string name="desc_generic_idp">Use a generic OAuth identity provider, like Apple, Microsoft, Yahoo, or Twitter to authenticate with Firebase.</string>
-
+    <string name="total_hours">Total Hours: %1$f</string>
+    <string name="popup_time_too_short">This session lasted less than 30 mins. Only sessions longer than 30 mins will be recorded.</string>
     <string name="hint_user_id">User ID</string>
+    <string name="hint_admin">Admin Code (Academic Chair first time creating account only): </string>
+    <string name="submit_hour">Would you like to submit this session?</string>
     <string name="get_custom_token">Get Token</string>
     <string name="sign_in">Sign In</string>
     <string name="create_account">Create Account</string>
@@ -54,7 +62,7 @@
     <string name="signed_in">Signed In</string>
     <string name="signed_out">Signed Out</string>
     <string name="token_null">Token: null</string>
-    <string name="hint_sistername">Sister name(For Creating Account Only)</string>
+    <string name="hint_sistername">Sister name (First time creating account only): </string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="desc_firebase_lockup">Firebase logo and name</string>

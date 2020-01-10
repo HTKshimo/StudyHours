@@ -15,4 +15,8 @@ public class StudySession {
     public long getIn() {
         return in;
     }
+
+    public long getOut() {
+        return out;
+    }
 }

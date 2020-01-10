@@ -1,16 +1,19 @@
 package com.example.studyhours;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.studyhours.ui.gallery.GalleryFragment;
 import com.example.studyhours.ui.home.HomeFragment;
+import com.example.studyhours.ui.sistersHours.SistersHoursFragment;
 import com.google.android.gms.auth.api.Auth;
 
 import android.util.Pair;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -22,6 +25,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.*;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -30,12 +38,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.TextView;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,6 +48,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser mFirebaseUser;
     private String mUsername;
     private String mPhotoUrl;
+    private HomeFragment homeFragment = new HomeFragment();
+    private GalleryFragment galleryFragment = new GalleryFragment();
+    private SistersHoursFragment sistersHoursFragment = new SistersHoursFragment();
+    private Fragment fragment;
+    FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +104,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+//        System.out.println("navigationView.findViewById(R.id.nav_sisters_hours)" + navigationView.findViewById(R.id.nav_sisters_hours));
         navigationView.setNavigationItemSelectedListener(this);
+        //TODO: disable sister Hours MenuItem for non-admin users.
+//        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        final DatabaseReference usersRef = database.getReference("users/"+mFirebaseUser.getUid()+"/admin");
+//        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.getValue(Boolean.class)){
+//                    NavigationView navigationView = findViewById(R.id.nav_view);
+//                    MenuItem sistersHours = navigationView.findViewById(R.id.nav_sisters_hours);
+//                    sistersHours.setEnabled(true);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 //        mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -142,20 +170,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void displayView(int id) {
 
-        Fragment fragment = null;
-        String title = getString(R.string.app_name);
+        String title = "";
 
         if (id == R.id.nav_record){
-            fragment = new HomeFragment();
             title  = "Record Hours";
-        }else if (id == R.id.nav_history){
-            //if com.example.studyhours.admin, open Sisters Hours Fragment, else open Gallery fragment
-            fragment = new GalleryFragment();
-            title  = "Hours History";
+            fragment = homeFragment;
+        }else if (id == R.id.nav_history) {
+            title = "Hours History";
+            fragment = galleryFragment;
+        }else if (id == R.id.nav_sisters_hours){
+            title = "All Sisters Hours";
+//            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//            final DatabaseReference usersRef = database.getReference("users/"+mFirebaseUser.getUid()+"/admin");
+//            usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    System.out.println("dataSnapshot.getKey()" + dataSnapshot.getKey());
+//                    System.out.println("dataSnapshot.getVale()" + dataSnapshot.getValue());
+//                    if(dataSnapshot.getValue(Boolean.class)){
+//                        fragment = sistersHoursFragment;
+//                    }
+//                }
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
+            fragment = sistersHoursFragment;
         }
 
         if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            FragmentTransaction ft = fragmentManager.beginTransaction();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();
         }
