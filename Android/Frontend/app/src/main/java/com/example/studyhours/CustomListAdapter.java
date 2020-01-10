@@ -15,9 +15,9 @@ public class CustomListAdapter extends ArrayAdapter {
     private final Activity context;
 
     //to store the list of details
-    private final ArrayList<String> infoArray;
+    private final String[] infoArray;
 
-    public CustomListAdapter(Activity context, ArrayList<String> infoArrayParam){
+    public CustomListAdapter(Activity context, String[] infoArrayParam){
 
         super(context,R.layout.listview_row , infoArrayParam);
         this.context=context;
@@ -34,7 +34,7 @@ public class CustomListAdapter extends ArrayAdapter {
         TextView infoTextField = rowView.findViewById(R.id.detail_date_time);
 
         //this code sets the values of the objects to values from the arrays
-        infoTextField.setText(infoArray.get(position));
+        infoTextField.setText(infoArray[position]);
 
         return rowView;
 

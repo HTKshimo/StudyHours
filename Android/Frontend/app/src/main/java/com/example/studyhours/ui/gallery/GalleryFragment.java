@@ -30,6 +30,7 @@ import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -52,10 +53,9 @@ public class GalleryFragment extends Fragment {
         infoArray = new ArrayList<>();
         map = new HashMap<>();
 
-        final FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference usersRef = database.getReference("hours/"+mFirebaseUser.getUid());
+        String UID = getArguments().getString("UID");
+        final DatabaseReference usersRef = database.getReference("hours/" + UID);
         usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -66,7 +66,7 @@ public class GalleryFragment extends Fragment {
                         System.out.println("child.getKey().equals(\"totalHours\")");
                         totalHours = child.getValue(Float.class);
                         totalHoursText.setText(getString(R.string.total_hours, totalHours));
-                    }else if(!child.getKey().equals("numSessions")){
+                    }else if((!child.getKey().equals("numSessions")) && (!child.getKey().equals("sisterName"))){
                         System.out.println("!child.getKey().equals(\"numSessions\")");
                         in = child.child("in").getValue(Long.class);
                         out = child.child("out").getValue(Long.class);
@@ -82,7 +82,7 @@ public class GalleryFragment extends Fragment {
                     infoArray.add(map.get(key));
 //                    System.out.println("key: "+key);
                 }
-                CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), infoArray);
+                CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), Arrays.copyOf(infoArray.toArray(), infoArray.toArray().length, String[].class));
                 listView = root.findViewById(R.id.simpleListView);
                 listView.setAdapter(customListAdapter);
             }

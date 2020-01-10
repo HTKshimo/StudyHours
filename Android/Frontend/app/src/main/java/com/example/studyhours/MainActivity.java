@@ -48,9 +48,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser mFirebaseUser;
     private String mUsername;
     private String mPhotoUrl;
-    private HomeFragment homeFragment = new HomeFragment();
-    private GalleryFragment galleryFragment = new GalleryFragment();
-    private SistersHoursFragment sistersHoursFragment = new SistersHoursFragment();
     private Fragment fragment;
     FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -174,10 +171,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_record){
             title  = "Record Hours";
-            fragment = homeFragment;
+            fragment = new HomeFragment();
         }else if (id == R.id.nav_history) {
             title = "Hours History";
-            fragment = galleryFragment;
+            fragment = new GalleryFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("UID", mFirebaseUser.getUid());
+            fragment.setArguments(bundle);
         }else if (id == R.id.nav_sisters_hours){
             title = "All Sisters Hours";
 //            final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -196,12 +196,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //
 //                }
 //            });
-            fragment = sistersHoursFragment;
+            title  = "Sisters Hours";
+            fragment = new SistersHoursFragment();
         }
 
         if (fragment != null) {
             FragmentTransaction ft = fragmentManager.beginTransaction();
             ft.replace(R.id.content_frame, fragment);
+            ft.addToBackStack(null);
             ft.commit();
         }
 
