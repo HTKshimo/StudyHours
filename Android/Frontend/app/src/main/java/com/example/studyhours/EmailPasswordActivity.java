@@ -96,7 +96,7 @@ public class EmailPasswordActivity extends BaseActivity implements
     // [END on_start_check_user]
 
     private void createAccount(String email, String password) {
-        Log.d(TAG, "createAccount:" + email);
+//        Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
             return;
         }
@@ -115,7 +115,7 @@ public class EmailPasswordActivity extends BaseActivity implements
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
+//                                Log.d(TAG, "createUserWithEmail:success");
                                 final FirebaseUser user = mAuth.getCurrentUser();
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(mDisplayName.getText().toString()).build();
@@ -124,7 +124,7 @@ public class EmailPasswordActivity extends BaseActivity implements
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Log.d(TAG, "User display_name added");
+//                                                    Log.d(TAG, "User display_name added");
                                                 }
                                             }
                                         });
@@ -132,7 +132,13 @@ public class EmailPasswordActivity extends BaseActivity implements
                                 //add admin status to db
                                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 final DatabaseReference usersRef = database.getReference();
-                                final long adminCode = Long.valueOf(mAdminCode.getText().toString());
+                                long temp;
+                                if (!mAdminCode.getText().toString().equals("")){
+                                    temp = Long.valueOf(mAdminCode.getText().toString());
+                                }else{
+                                    temp = 0;
+                                }
+                                final long adminCode = temp;
                                 usersRef.child("adminCode").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -159,7 +165,7 @@ public class EmailPasswordActivity extends BaseActivity implements
                                 finish();
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+//                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
 
                                 Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
@@ -177,7 +183,7 @@ public class EmailPasswordActivity extends BaseActivity implements
     }
 
     private void signIn(String email, String password) {
-        Log.d(TAG, "signIn:" + email);
+//        Log.d(TAG, "signIn:" + email);
         if (!validateForm()) {
             return;
         }
@@ -191,14 +197,14 @@ public class EmailPasswordActivity extends BaseActivity implements
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
+//                            Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+//                            Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
@@ -240,7 +246,7 @@ public class EmailPasswordActivity extends BaseActivity implements
                                     "Verification email sent to " + user.getEmail(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            Log.e(TAG, "sendEmailVerification", task.getException());
+//                            Log.e(TAG, "sendEmailVerification", task.getException());
                             Toast.makeText(EmailPasswordActivity.this,
                                     "Failed to send verification email.",
                                     Toast.LENGTH_SHORT).show();

@@ -79,6 +79,8 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 //        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         final View root = inflater.inflate(R.layout.activity_main, container, false);
+        //TODO: disable all menuitems when start button is clicked
+//        final View nav = inflater.inflate(R.layout.activity_navigation, container, false);
 //        final TextView textView = root.findViewById(R.id.text_home);
 //        homeViewModel.getText().observe(this, new Observer<String>() {
 //            @Override
@@ -94,6 +96,10 @@ public class HomeFragment extends Fragment {
         recordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+//                    nav.findViewById(R.id.nav_sisters_hours).setEnabled(false);
+//                    nav.findViewById(R.id.nav_record).setEnabled(false);
+//                    nav.findViewById(R.id.nav_history).setEnabled(false);
+//                    nav.findViewById(R.id.nav_logout).setEnabled(false);
                     // The toggle is enabled
                     if (!inherited || !WasRunning){
                         chronometer.setBase(SystemClock.elapsedRealtime());
@@ -103,6 +109,11 @@ public class HomeFragment extends Fragment {
                     chronometer.start();
                 } else {
                     // The toggle is disabled
+//                    getActivity().findViewById(R.id.nav_sisters_hours).setEnabled(false);
+//                    getActivity().findViewById(R.id.nav_record).setEnabled(false);
+//                    getActivity().findViewById(R.id.nav_history).setEnabled(false);
+//                    getActivity().findViewById(R.id.nav_logout).setEnabled(false);
+
                     chronometer.stop();
                     stopOffset = SystemClock.elapsedRealtime() - chronometer.getBase();
 

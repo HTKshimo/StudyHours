@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        signingConfig1 {
+            storeFile file('C:\\Users\\lishu\\keystores\\upload-keystore.jks')
+            storePassword 'OPD@lf23'
+            keyAlias = 'signStudyHours'
+            keyPassword 'kakaxi09150323'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
