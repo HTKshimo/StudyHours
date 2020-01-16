@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="z4l-Ss-Bjb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--My Hours History-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="StudyHours" customModuleProvider="target" sceneMemberID="viewController">
@@ -15,8 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tBB-W9-3IA">
-                                <rect key="frame" x="0.0" y="54" width="414" height="804"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tBB-W9-3IA">
+                                <rect key="frame" x="0.0" y="108" width="414" height="750"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Hours: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnT-Cq-8Wa">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
@@ -24,8 +24,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Fl-a4-5lf">
-                                        <rect key="frame" x="0.0" y="48" width="414" height="756"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Fl-a4-5lf">
+                                        <rect key="frame" x="0.0" y="48" width="414" height="702"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="l9R-cg-mSN"/>
@@ -33,31 +33,102 @@
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="XnT-Cq-8Wa" secondAttribute="trailing" id="7f2-o1-8zT"/>
-                                    <constraint firstAttribute="trailing" secondItem="6Fl-a4-5lf" secondAttribute="trailing" id="AWh-GY-K3l"/>
-                                    <constraint firstItem="6Fl-a4-5lf" firstAttribute="leading" secondItem="tBB-W9-3IA" secondAttribute="leading" id="CQU-aR-xs9"/>
-                                    <constraint firstItem="6Fl-a4-5lf" firstAttribute="top" secondItem="XnT-Cq-8Wa" secondAttribute="bottom" id="SGG-VX-8ik"/>
-                                    <constraint firstItem="XnT-Cq-8Wa" firstAttribute="leading" secondItem="tBB-W9-3IA" secondAttribute="leading" id="eL2-gt-NWL"/>
-                                    <constraint firstItem="XnT-Cq-8Wa" firstAttribute="top" secondItem="tBB-W9-3IA" secondAttribute="top" id="yET-wt-xHf"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="tBB-W9-3IA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="cDz-IF-OZR"/>
-                            <constraint firstItem="tBB-W9-3IA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="e62-yD-xIY"/>
-                            <constraint firstItem="tBB-W9-3IA" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jvd-Bd-QPD"/>
+                            <constraint firstItem="tBB-W9-3IA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Q61-8p-P9Y"/>
+                            <constraint firstItem="tBB-W9-3IA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Zom-h0-d7d"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tBB-W9-3IA" secondAttribute="bottom" constant="4" id="wKm-aF-cJD" userLabel="Stack View.bottom = Safe Area.bottom - 4"/>
+                            <constraint firstItem="tBB-W9-3IA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="ywh-j5-tPz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="My Hours History" id="Rvq-d4-tAz"/>
                     <connections>
                         <outlet property="myHoursTableView" destination="6Fl-a4-5lf" id="jae-D4-mva"/>
+                        <outlet property="totalHours" destination="XnT-Cq-8Wa" id="5Oe-r3-5GV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
+            <point key="canvasLocation" x="775" y="115"/>
+        </scene>
+        <!--Record Hours-->
+        <scene sceneID="ll7-PN-2fp">
+            <objects>
+                <viewController id="UrJ-Qs-dZ2" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z8q-Cd-QW5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uWj-6o-9nE">
+                                <rect key="frame" x="0.0" y="108" width="414" height="750"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAd-Mx-jwA">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="122"/>
+                                        <string key="text">Greatings Sister!
+Here are some instructions:
+1. Click on the start button to start recording and stop to finish recording. 
+2. Only sessions longer than 30 minutes will be accepted.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yk6-nf-MIN">
+                                        <rect key="frame" x="0.0" y="142" width="414" height="113.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="95"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKO-Lc-wzg">
+                                        <rect key="frame" x="0.0" y="275.5" width="414" height="416.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <state key="normal" title="Start"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XxJ-iT-xMa">
+                                        <rect key="frame" x="0.0" y="712" width="414" height="38"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <state key="normal" title="My Hours History"/>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="5vk-jr-YwN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="QuC-fK-bHQ" firstAttribute="bottom" secondItem="uWj-6o-9nE" secondAttribute="bottom" constant="4" id="IzJ-Tz-QBZ"/>
+                            <constraint firstItem="uWj-6o-9nE" firstAttribute="centerX" secondItem="Z8q-Cd-QW5" secondAttribute="centerX" id="Qr7-Nh-2Vl"/>
+                            <constraint firstItem="uWj-6o-9nE" firstAttribute="top" secondItem="QuC-fK-bHQ" secondAttribute="top" constant="20" id="wfL-CP-dIj"/>
+                            <constraint firstItem="uWj-6o-9nE" firstAttribute="leading" secondItem="QuC-fK-bHQ" secondAttribute="leading" id="yw5-0x-3kD"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QuC-fK-bHQ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Record Hours" id="kE4-5a-U3y"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tEU-Nb-qec" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="61" y="115"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cII-hP-KHI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="z4l-Ss-Bjb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cmJ-4d-SxC">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="UrJ-Qs-dZ2" kind="relationship" relationship="rootViewController" id="hkd-Qv-pSN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ble-DQ-6aS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-650.72463768115949" y="114.50892857142857"/>
         </scene>
     </scenes>
 </document>

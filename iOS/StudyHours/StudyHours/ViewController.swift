@@ -9,6 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    //MARK: Properties
+    @IBOutlet weak var totalHours: UILabel!
+    @IBOutlet weak var myHoursTableView: UITableView!
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //normally it would be the length of an array controller.
         //TODO: connect to firebase and read num of Sessions
@@ -27,8 +32,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-    @IBOutlet weak var myHoursTableView: UITableView!
     
     //BUG: Tableview's content disappeared after adding views to a stack view and adding constraints. Possible fix: continue to see how the tutorial connect the textfield content to the label content.
     
