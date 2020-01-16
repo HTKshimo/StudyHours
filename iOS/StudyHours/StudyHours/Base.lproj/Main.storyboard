@@ -15,25 +15,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Fl-a4-5lf">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="nbW-zT-alN"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="iVB-Rn-7TR"/>
-                                </connections>
-                            </tableView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zrV-RO-Nbn">
-                                <rect key="frame" x="0.0" y="44" width="414" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tBB-W9-3IA">
+                                <rect key="frame" x="0.0" y="54" width="414" height="804"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Hours: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnT-Cq-8Wa">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Fl-a4-5lf">
+                                        <rect key="frame" x="0.0" y="48" width="414" height="756"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="l9R-cg-mSN"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="eun-gG-J0u"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="XnT-Cq-8Wa" secondAttribute="trailing" id="7f2-o1-8zT"/>
+                                    <constraint firstAttribute="trailing" secondItem="6Fl-a4-5lf" secondAttribute="trailing" id="AWh-GY-K3l"/>
+                                    <constraint firstItem="6Fl-a4-5lf" firstAttribute="leading" secondItem="tBB-W9-3IA" secondAttribute="leading" id="CQU-aR-xs9"/>
+                                    <constraint firstItem="6Fl-a4-5lf" firstAttribute="top" secondItem="XnT-Cq-8Wa" secondAttribute="bottom" id="SGG-VX-8ik"/>
+                                    <constraint firstItem="XnT-Cq-8Wa" firstAttribute="leading" secondItem="tBB-W9-3IA" secondAttribute="leading" id="eL2-gt-NWL"/>
+                                    <constraint firstItem="XnT-Cq-8Wa" firstAttribute="top" secondItem="tBB-W9-3IA" secondAttribute="top" id="yET-wt-xHf"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="tBB-W9-3IA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="cDz-IF-OZR"/>
+                            <constraint firstItem="tBB-W9-3IA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="e62-yD-xIY"/>
+                            <constraint firstItem="tBB-W9-3IA" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jvd-Bd-QPD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="myHoursTableView" destination="6Fl-a4-5lf" id="HCD-e0-8fd"/>
+                        <outlet property="myHoursTableView" destination="6Fl-a4-5lf" id="jae-D4-mva"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

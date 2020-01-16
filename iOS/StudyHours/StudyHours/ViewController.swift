@@ -8,7 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //normally it would be the length of an array controller.
+        //TODO: connect to firebase and read num of Sessions
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "MyTestCell")
+        cell.textLabel?.text = "Row \(indexPath.row)"
+        cell.detailTextLabel?.text = "Subtitle \(indexPath.row)"
+        return cell
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +29,8 @@ class ViewController: UIViewController {
     }
 
     @IBOutlet weak var myHoursTableView: UITableView!
+    
+    //BUG: Tableview's content disappeared after adding views to a stack view and adding constraints. Possible fix: continue to see how the tutorial connect the textfield content to the label content.
     
 }
 
