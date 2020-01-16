@@ -33,7 +33,5 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view.
     }
     
-    //BUG: Tableview's content disappeared after adding views to a stack view and adding constraints. Possible fix: continue to see how the tutorial connect the textfield content to the label content.
-    
 }
 

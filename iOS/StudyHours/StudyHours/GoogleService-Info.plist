@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>637819159613-q8ajpvfpjpdqnmt78idba54ndtl0n93i.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.637819159613-q8ajpvfpjpdqnmt78idba54ndtl0n93i</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>637819159613-09pk3ho9hdqg9ah8953hpauj4otugv3o.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCeu54KFGjM5akG9Wb4tBLuFpch_jM40dk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>637819159613</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.StudyHours</string>
+	<key>PROJECT_ID</key>
+	<string>studyhours-52945</string>
+	<key>STORAGE_BUCKET</key>
+	<string>studyhours-52945.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:637819159613:ios:b7a86b940800d1d6679654</string>
+	<key>DATABASE_URL</key>
+	<string>https://studyhours-52945.firebaseio.com</string>
+</dict>
+</plist>
