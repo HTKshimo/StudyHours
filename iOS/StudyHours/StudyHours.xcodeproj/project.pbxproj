@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		FCC63C6623CD931800DF91E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC63C6423CD931800DF91E4 /* LaunchScreen.storyboard */; };
 		FCC63C7123CD931800DF91E4 /* StudyHoursTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC63C7023CD931800DF91E4 /* StudyHoursTests.swift */; };
 		FCC63C7F23D10CC900DF91E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCC63C7E23D10CC900DF91E4 /* GoogleService-Info.plist */; };
+		FCC63C8123D16F0200DF91E4 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC63C8023D16F0200DF91E4 /* RecordViewController.swift */; };
+		FCC63C8323D1704100DF91E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC63C8223D1704100DF91E4 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		FCC63C7023CD931800DF91E4 /* StudyHoursTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyHoursTests.swift; sourceTree = "<group>"; };
 		FCC63C7223CD931800DF91E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCC63C7E23D10CC900DF91E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FCC63C8023D16F0200DF91E4 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		FCC63C8223D1704100DF91E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +82,6 @@
 				773A60627D3FBCB96ACBB020 /* Pods-StudyHoursTests.debug.xcconfig */,
 				26C1DC488F66BC9D1C0CFB62 /* Pods-StudyHoursTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -117,6 +120,8 @@
 				FCC63C5923CD931700DF91E4 /* AppDelegate.swift */,
 				FCC63C5B23CD931700DF91E4 /* SceneDelegate.swift */,
 				FCC63C5D23CD931700DF91E4 /* ViewController.swift */,
+				FCC63C8023D16F0200DF91E4 /* RecordViewController.swift */,
+				FCC63C8223D1704100DF91E4 /* LoginViewController.swift */,
 				FCC63C5F23CD931700DF91E4 /* Main.storyboard */,
 				FCC63C6223CD931800DF91E4 /* Assets.xcassets */,
 				FCC63C6423CD931800DF91E4 /* LaunchScreen.storyboard */,
@@ -307,6 +312,8 @@
 				FCC63C5E23CD931700DF91E4 /* ViewController.swift in Sources */,
 				FCC63C5A23CD931700DF91E4 /* AppDelegate.swift in Sources */,
 				FCC63C5C23CD931700DF91E4 /* SceneDelegate.swift in Sources */,
+				FCC63C8323D1704100DF91E4 /* LoginViewController.swift in Sources */,
+				FCC63C8123D16F0200DF91E4 /* RecordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,3 +14,4 @@ target 'StudyHours' do
 
 end
 pod 'Firebase/Analytics'
+pod 'Firebase/Auth'

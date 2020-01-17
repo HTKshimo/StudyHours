@@ -23,7 +23,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "MyTestCell")
         cell.textLabel?.text = "Row \(indexPath.row)"
-        cell.detailTextLabel?.text = "Subtitle \(indexPath.row)"
+//        cell.detailTextLabel?.text = "Subtitle \(indexPath.row)"
         return cell
     }
     
