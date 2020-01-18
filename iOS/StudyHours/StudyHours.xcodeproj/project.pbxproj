@@ -19,6 +19,7 @@
 		FCC63C7F23D10CC900DF91E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCC63C7E23D10CC900DF91E4 /* GoogleService-Info.plist */; };
 		FCC63C8123D16F0200DF91E4 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC63C8023D16F0200DF91E4 /* RecordViewController.swift */; };
 		FCC63C8323D1704100DF91E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC63C8223D1704100DF91E4 /* LoginViewController.swift */; };
+		FCC63C8823D3AB6D00DF91E4 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC63C8723D3AB6D00DF91E4 /* Session.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		FCC63C7E23D10CC900DF91E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FCC63C8023D16F0200DF91E4 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		FCC63C8223D1704100DF91E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		FCC63C8723D3AB6D00DF91E4 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				FCC63C6423CD931800DF91E4 /* LaunchScreen.storyboard */,
 				FCC63C6723CD931800DF91E4 /* Info.plist */,
 				FCC63C7E23D10CC900DF91E4 /* GoogleService-Info.plist */,
+				FCC63C8723D3AB6D00DF91E4 /* Session.swift */,
 			);
 			path = StudyHours;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			files = (
 				FCC63C5E23CD931700DF91E4 /* ViewController.swift in Sources */,
 				FCC63C5A23CD931700DF91E4 /* AppDelegate.swift in Sources */,
+				FCC63C8823D3AB6D00DF91E4 /* Session.swift in Sources */,
 				FCC63C5C23CD931700DF91E4 /* SceneDelegate.swift in Sources */,
 				FCC63C8323D1704100DF91E4 /* LoginViewController.swift in Sources */,
 				FCC63C8123D16F0200DF91E4 /* RecordViewController.swift in Sources */,

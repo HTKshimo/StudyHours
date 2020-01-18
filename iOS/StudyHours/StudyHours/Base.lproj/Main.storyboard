@@ -47,12 +47,12 @@
                     <navigationItem key="navigationItem" title="My Hours History" id="Rvq-d4-tAz"/>
                     <connections>
                         <outlet property="myHoursTableView" destination="6Fl-a4-5lf" id="jae-D4-mva"/>
-                        <outlet property="totalHours" destination="XnT-Cq-8Wa" id="5Oe-r3-5GV"/>
+                        <outlet property="totalHoursText" destination="XnT-Cq-8Wa" id="jD2-m9-Jp7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="775" y="115"/>
+            <point key="canvasLocation" x="838" y="115"/>
         </scene>
         <!--Record Hours-->
         <scene sceneID="ll7-PN-2fp">
@@ -91,7 +91,7 @@ Here are some instructions:
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <state key="normal" title="My Hours History"/>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="Iux-Wg-SFa"/>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="aFM-ih-3PB"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -249,9 +249,11 @@ Here are some instructions:
                     <navigationItem key="navigationItem" id="z9f-pI-xEC"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="adminCode" destination="Bv6-x7-QvE" id="GwO-Me-KEK"/>
                         <outlet property="emailField" destination="xh6-X5-Kt9" id="5Tx-oS-Hqy"/>
                         <outlet property="loginButton" destination="L8a-5J-JSa" id="uyJ-aT-Ycc"/>
                         <outlet property="passwordField" destination="XI0-30-g2M" id="dzf-Z6-gF5"/>
+                        <outlet property="sisterName" destination="Lkd-pZ-ftf" id="fr7-UZ-FB6"/>
                         <segue destination="UrJ-Qs-dZ2" kind="show" identifier="login" id="wdS-0n-Udw"/>
                     </connections>
                 </viewController>
@@ -261,7 +263,6 @@ Here are some instructions:
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wdS-0n-Udw"/>
         <segue reference="W6Z-sp-Dfq"/>
     </inferredMetricsTieBreakers>
 </document>
