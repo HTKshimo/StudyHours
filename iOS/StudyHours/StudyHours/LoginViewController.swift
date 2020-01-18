@@ -10,50 +10,59 @@ import UIKit
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
+    var gradient:CAGradientLayer?
 
+    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        loginButton.layer.cornerRadius = 10
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if Auth.auth().currentUser != nil {
+            self.performSegue(withIdentifier: "login", sender: self)
+        }
     }
     
     @IBAction func SignIn(_ sender: Any) {
-        guard let email = self.emailField.text, let password = self.passwordField.text else {
-//          self.showMessagePrompt("email/password can't be empty")
-          return
-        }
-//        showSpinner {
-          // [START headless_email_auth]
-          Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-            guard let strongSelf = self else { return }
-            // [START_EXCLUDE]
-//            strongSelf.hideSpinner {
-              if let error = error {
-                print("Wrong password")
-//                strongSelf.showMessagePrompt(error.localizedDescription)
-//                return
-              }else{
-                print("strongSelf.navigationController?.popViewController(animated: true)")
-                //Expect: navigate to the first scene of navigationView
-                //Actual: no action
-                strongSelf.navigationController?.popViewController(animated: true)
+        Auth.auth().signIn(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
+            if error == nil{
+                self.performSegue(withIdentifier: "login", sender: self)
+            }else{
+                print(error!)
+                let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                
+                alertController.addAction(defaultAction)
+                self.present(alertController, animated: true, completion: nil)
             }
-//              strongSelf.navigationController?.popViewController(animated: true)
-//            let storyboard : UIStoryboard = UIStoryboard(name: "AccountStoryboard", bundle: nil)
-//            let vc : RecordViewController = storyboard.instantiateViewController(withIdentifier: "record") as! RecordViewController
-//
-//            let navigationController = UINavigationController(rootViewController: vc)
-//
-//            self?.present(navigationController, animated: true, completion: nil)
-            }
-            // [END_EXCLUDE]
-//          }
-          // [END headless_email_auth]
         }
+    }
+    
+    @IBAction func SignUp(_ sender: Any) {
+        Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { authResult, error in
+            if error == nil{
+                self.performSegue(withIdentifier: "login", sender: self)
+            }else{
+                print(error!)
+                let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                
+                alertController.addAction(defaultAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+        textField.resignFirstResponder()
+        return true
+    }
 //    }
     
     /*
@@ -65,5 +74,4 @@ class LoginViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7q7-L6-u4s">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hFc-2i-zfS">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -10,7 +10,7 @@
         <!--My Hours History-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="StudyHours" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="history" id="BYZ-38-t0r" customClass="ViewController" customModule="StudyHours" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,7 +91,7 @@ Here are some instructions:
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <state key="normal" title="My Hours History"/>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="5vk-jr-YwN"/>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="Iux-Wg-SFa"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -106,16 +106,42 @@ Here are some instructions:
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QuC-fK-bHQ"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Record Hours" id="kE4-5a-U3y"/>
+                    <navigationItem key="navigationItem" title="Record Hours" id="kE4-5a-U3y">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="Frm-lx-KjM">
+                            <connections>
+                                <action selector="logout:" destination="UrJ-Qs-dZ2" id="6P0-pF-qiP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <segue destination="7q7-L6-u4s" kind="show" identifier="logout" id="W6Z-sp-Dfq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tEU-Nb-qec" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="61" y="115"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="OpS-Jk-wt5">
+            <objects>
+                <navigationController id="hFc-2i-zfS" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pR9-Kf-XBv">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="7q7-L6-u4s" kind="relationship" relationship="rootViewController" id="chr-uI-tVs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hue-4L-G4Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2319" y="-604"/>
+        </scene>
         <!--LoginViewController-->
         <scene sceneID="wzp-18-587">
             <objects>
-                <viewController title="LoginViewController" id="7q7-L6-u4s" customClass="LoginViewController" customModule="StudyHours" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="login" title="LoginViewController" id="7q7-L6-u4s" customClass="LoginViewController" customModule="StudyHours" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sgB-3I-l3v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -187,6 +213,9 @@ Here are some instructions:
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1f-SE-Cnt">
                                                 <rect key="frame" x="0.0" y="0.0" width="51" height="30"/>
                                                 <state key="normal" title="SIgnUp"/>
+                                                <connections>
+                                                    <action selector="SignUp:" destination="7q7-L6-u4s" eventType="touchUpInside" id="JQp-1G-ijT"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L8a-5J-JSa">
                                                 <rect key="frame" x="101" y="0.0" width="43" height="30"/>
@@ -217,32 +246,22 @@ Here are some instructions:
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kpB-Gs-HTX"/>
                     </view>
+                    <navigationItem key="navigationItem" id="z9f-pI-xEC"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="emailField" destination="xh6-X5-Kt9" id="5Tx-oS-Hqy"/>
+                        <outlet property="loginButton" destination="L8a-5J-JSa" id="uyJ-aT-Ycc"/>
                         <outlet property="passwordField" destination="XI0-30-g2M" id="dzf-Z6-gF5"/>
+                        <segue destination="UrJ-Qs-dZ2" kind="show" identifier="login" id="wdS-0n-Udw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAP-U4-lSc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-652.23214285714278" y="-584.05797101449275"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="cII-hP-KHI">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="z4l-Ss-Bjb" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cmJ-4d-SxC">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="UrJ-Qs-dZ2" kind="relationship" relationship="rootViewController" id="hkd-Qv-pSN"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ble-DQ-6aS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-650.72463768115949" y="114.50892857142857"/>
+            <point key="canvasLocation" x="-1243" y="-604"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="wdS-0n-Udw"/>
+        <segue reference="W6Z-sp-Dfq"/>
+    </inferredMetricsTieBreakers>
 </document>
