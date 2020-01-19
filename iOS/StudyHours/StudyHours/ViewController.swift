@@ -19,6 +19,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var totalHoursText: UILabel!
     @IBOutlet weak var myHoursTableView: UITableView!
+    @IBOutlet weak var actIndicator2: UIActivityIndicatorView!
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //normally it would be the length of an array controller.
@@ -32,7 +34,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let dateIn = Date(timeIntervalSince1970: TimeInterval(Double((session.getIn())/1000)))
             let dateOut = Date(timeIntervalSince1970: TimeInterval(Double((session.getOut())/1000)))
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
             let dateInFormatted = dateFormatter.string(from: dateIn)
             let dateOutFormatted = dateFormatter.string(from: dateOut)
             cell.textLabel?.text = dateInFormatted + " - " + dateOutFormatted
@@ -41,10 +43,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        actIndicator2.startAnimating()
         ref.child("hours").child(String(user!.uid)).observe(.value) { snapshot in
             for child in (snapshot.children.allObjects as! [DataSnapshot]){
                 if (child.key == "totalHours"){
@@ -60,11 +62,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                             out = elem.value as! Int64
                         }
                     }
-                    let session = Session(`in`, out)
-                    self.sessions[Int(child.key)!] = session
+                    if (out != 0){
+                        let session = Session(`in`, out)
+                        self.sessions[Int(child.key)!] = session
+                    }
                 }
             }
             self.myHoursTableView.reloadData()
+            self.actIndicator2.stopAnimating()
         }
     }
     

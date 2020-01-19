@@ -24,8 +24,12 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" id="KhL-Bp-tXW">
+                                        <rect key="frame" x="0.0" y="48" width="414" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Fl-a4-5lf">
-                                        <rect key="frame" x="0.0" y="48" width="414" height="702"/>
+                                        <rect key="frame" x="0.0" y="68" width="414" height="682"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="l9R-cg-mSN"/>
@@ -46,13 +50,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="My Hours History" id="Rvq-d4-tAz"/>
                     <connections>
+                        <outlet property="actIndicator2" destination="KhL-Bp-tXW" id="wAH-l6-PDu"/>
                         <outlet property="myHoursTableView" destination="6Fl-a4-5lf" id="jae-D4-mva"/>
                         <outlet property="totalHoursText" destination="XnT-Cq-8Wa" id="jD2-m9-Jp7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="838" y="115"/>
+            <point key="canvasLocation" x="779.71014492753625" y="114.50892857142857"/>
         </scene>
         <!--Record Hours-->
         <scene sceneID="ll7-PN-2fp">
@@ -65,7 +70,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uWj-6o-9nE">
                                 <rect key="frame" x="0.0" y="108" width="414" height="750"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAd-Mx-jwA">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAd-Mx-jwA">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="122"/>
                                         <string key="text">Greatings Sister!
 Here are some instructions:
@@ -75,17 +80,52 @@ Here are some instructions:
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yk6-nf-MIN">
-                                        <rect key="frame" x="0.0" y="142" width="414" height="113.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="95"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lgO-1r-cHZ">
+                                        <rect key="frame" x="0.0" y="142" width="414" height="102"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="checkInTime" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="40" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yk6-nf-MIN">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="41"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" staticText="YES" adjustable="YES"/>
+                                                </accessibility>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="elapsedTime" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="40" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nFQ-XX-8Rt">
+                                                <rect key="frame" x="0.0" y="61" width="414" height="41"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="1Iz-Eb-eUK">
+                                        <rect key="frame" x="0.0" y="264" width="414" height="20"/>
+                                    </activityIndicatorView>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKO-Lc-wzg">
-                                        <rect key="frame" x="0.0" y="275.5" width="414" height="416.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <rect key="frame" x="0.0" y="304" width="414" height="337"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                         <state key="normal" title="Start"/>
+                                        <connections>
+                                            <action selector="startRecording:" destination="UrJ-Qs-dZ2" eventType="touchUpInside" id="ayZ-J8-nar"/>
+                                        </connections>
                                     </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="slu-Vr-HXE">
+                                        <rect key="frame" x="0.0" y="661" width="414" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mute all notifications while I'm studying" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEA-ro-36T">
+                                                <rect key="frame" x="0.0" y="0.0" width="346" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="muteNotification" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fL-jy-QIA">
+                                                <rect key="frame" x="356" y="0.0" width="60" height="31"/>
+                                                <accessibility key="accessibilityConfiguration" label="Mute all notifications while I'm studying"/>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XxJ-iT-xMa">
                                         <rect key="frame" x="0.0" y="712" width="414" height="38"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
@@ -115,6 +155,10 @@ Here are some instructions:
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="actIndicator" destination="1Iz-Eb-eUK" id="d82-we-txl"/>
+                        <outlet property="checkInTime" destination="Yk6-nf-MIN" id="exu-ks-szJ"/>
+                        <outlet property="elapsedTime" destination="nFQ-XX-8Rt" id="dLx-lx-ewM"/>
+                        <outlet property="startButton" destination="EKO-Lc-wzg" id="qru-XT-qUr"/>
                         <segue destination="7q7-L6-u4s" kind="show" identifier="logout" id="W6Z-sp-Dfq"/>
                     </connections>
                 </viewController>
@@ -136,7 +180,7 @@ Here are some instructions:
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hue-4L-G4Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2319" y="-604"/>
+            <point key="canvasLocation" x="-1581" y="115"/>
         </scene>
         <!--LoginViewController-->
         <scene sceneID="wzp-18-587">
@@ -259,7 +303,7 @@ Here are some instructions:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAP-U4-lSc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1243" y="-604"/>
+            <point key="canvasLocation" x="-774" y="115"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

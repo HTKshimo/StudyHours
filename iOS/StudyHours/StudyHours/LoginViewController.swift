@@ -26,6 +26,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if Auth.auth().currentUser != nil {
+            print(Auth.auth().currentUser!.uid)
             self.performSegue(withIdentifier: "login", sender: self)
         }
     }
@@ -50,7 +51,6 @@ class LoginViewController: UIViewController {
             if error == nil{
                 var ref: DatabaseReference!
                 ref = Database.database().reference()
-                let user = Auth.auth().currentUser
                 let inputAdminCode = Int(self.adminCode.text!)
                 let userID = Auth.auth().currentUser?.uid
                 
@@ -58,7 +58,6 @@ class LoginViewController: UIViewController {
                     // Get user value
                     let value = snapshot.value as? NSDictionary
                     let adminCode = value?["adminCode"] as? Int
-                    print(adminCode)
                     var post: [String : Any]
                     if adminCode == inputAdminCode{
                         post = ["admin": true]
@@ -66,7 +65,7 @@ class LoginViewController: UIViewController {
                         post = ["admin": false]
                     }
                     ref.child("users").child(userID!).setValue(post)
-                  }) { (error) in
+                }) { (error) in
                     print(error.localizedDescription)
                 }
                 let sisterNameText = self.sisterName.text!
