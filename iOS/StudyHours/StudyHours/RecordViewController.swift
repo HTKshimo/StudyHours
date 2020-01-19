@@ -93,55 +93,66 @@ class RecordViewController: UIViewController {
         ref.child("hours/\(String(user!.uid))").observeSingleEvent(of: .value, with: { (snapshot) in
             var `in` : Int64 = 0
             let value = snapshot.value as? NSDictionary
-            var numSessions = value?["numSessions"] as? Int
-            var totalHours = value?["totalHours"] as? Double
+            let numSessions = value?["numSessions"] as? Int
+            let totalHours = value?["totalHours"] as? Double
             if (self.recording){ //Just Started Recording by clicking the button
                 `in` = Int64(NSDate().timeIntervalSince1970 * 1000)
                 //store `in` in database
                 self.ref.child("hours/\(String(self.user!.uid))/\(String(describing: numSessions!+1))/in").setValue(`in`)
             }else{ //Just finished recording by clicking the button
-                //TODO: Popup to ask if want to submit this session
-                var submit : Bool = true
-                
                 self.ref.child("hours/\(String(self.user!.uid))/\(String(numSessions!+1))").observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
                     `in` = (value?["in"] as? Int64)!
-                    print("`in`: \(`in`)")
+//                    print("`in`: \(`in`)")
                     let out = Int64(NSDate().timeIntervalSince1970 * 1000)
                     let interval = out - `in`
-                    print("out: \(out)")
-                    let numHours = Double(interval) / 3600 / 1000
-                    let str = String(format: "%.1f", numHours)
-                    print("interval: \(interval)")
-                    if (submit && (interval > 1800000)){
-                        numSessions! += 1
-                        //update numSessions
-                        self.ref.child("hours/\(String(self.user!.uid))/numSessions").setValue(numSessions)
-                        //add the out time to child with key [numSessions + 1]
-                        self.ref.child("hours/\(String(self.user!.uid))/\(String(describing: numSessions!))/out").setValue(out)
-                        //update totalHours
-                    
-                        totalHours! += Double(str)!
-                        self.ref.child("hours/\(String(self.user!.uid))/totalHours").setValue(totalHours)
+                    if (interval > 1800000){
+                        //TODO: Popup to ask if want to submit this session
+                        let alertC = UIAlertController(title: "Confirm", message: "Would you like to submit this session?", preferredStyle: .alert)
+                        alertC.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                            self.recordSession(interval, numSessions!, out, totalHours!)
+                        }))
+                        alertC.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in
+                            self.dismissSession(numSessions!)
+                        }))
+                        self.present(alertC, animated: true, completion: nil)
                     }else{
-                        if (interval <= 1800000){
-                            //TODO: popup reminding that this session is less than 30 mins hence was not recorded
-                        }
-                        //remove the child with key [numSessions + 1]
-                        self.ref.child("hours/\(String(self.user!.uid))/\(String(describing: numSessions!+1))").setValue(nil)
+                        //popup reminding that this session is less than 30 mins hence was not recorded
+                        let alertMessage = "This session is not recorded because it lasted less than 30 minutes."
+                        let alertController = UIAlertController(title: "Warning", message: alertMessage, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                        alertController.addAction(defaultAction)
+                        self.present(alertController, animated: true, completion: nil)
+                        self.dismissSession(numSessions!)
                     }
                 }) { (error) in
                     print(error.localizedDescription)
                 }
-                `in` = 0
             }
             self.updateScreen(self.recording, `in`)
-//            print("self.recording: \(self.recording)")
         }) { (error) in
             print(error.localizedDescription)
         }
     }
-
+    
+    func recordSession(_ interval : Int64, _ numSessionsIn : Int, _ out : Int64, _ totalHoursIn : Double) {
+        let numHours = Double(interval) / 3600 / 1000
+        let str = String(format: "%.1f", numHours)
+//        print("interval: \(interval)")
+        let numSessions = numSessionsIn + 1
+        //update numSessions
+        self.ref.child("hours/\(String(self.user!.uid))/numSessions").setValue(numSessions)
+        //add the out time to child with key [numSessions + 1]
+        self.ref.child("hours/\(String(self.user!.uid))/\(String(describing: numSessions))/out").setValue(out)
+        //update totalHours
+        let totalHours = totalHoursIn + Double(str)!
+        self.ref.child("hours/\(String(self.user!.uid))/totalHours").setValue(totalHours)
+    }
+    
+    func dismissSession(_ numSessions : Int) {
+        //remove the child with key [numSessions + 1]
+        self.ref.child("hours/\(String(self.user!.uid))/\(String(describing: numSessions+1))").setValue(nil)
+    }
     /*
     // MARK: - Navigation
 
