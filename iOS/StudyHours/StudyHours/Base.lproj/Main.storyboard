@@ -120,7 +120,7 @@ Here are some instructions:
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="muteNotification" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fL-jy-QIA">
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="muteNotification" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5fL-jy-QIA">
                                                 <rect key="frame" x="356" y="0.0" width="60" height="31"/>
                                                 <accessibility key="accessibilityConfiguration" label="Mute all notifications while I'm studying"/>
                                             </switch>

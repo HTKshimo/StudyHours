@@ -20,6 +20,8 @@ class RecordViewController: UIViewController {
     var ref = Database.database().reference()
     let user = Auth.auth().currentUser
     var recording : Bool = false
+    var counter : Int = 0
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,16 +49,26 @@ class RecordViewController: UIViewController {
                 }
             }
 //            print("observe self.recording: \(self.recording)")
-//            print(`in`)
+            print("viewDidLoad")
             self.updateScreen(self.recording, `in`)
             self.actIndicator.stopAnimating()
         }
     }
     
+    @objc func UpdateTimer() {
+        counter = counter + 1
+        elapsedTime.text = String(format: "Duration: \n%02d:%02d", counter/60, counter%60)
+    }
+    
     func updateScreen(_ recording : Bool, _ inTime : Int64) {
         if (recording){
             let dateIn = Date(timeIntervalSince1970: TimeInterval(Double(inTime/1000)))
-//            let interval = Date().timeIntervalSince(dateIn)
+            counter = Int(Int64(NSDate().timeIntervalSince1970 * 1000) - inTime)/1000/60
+            elapsedTime.text = String(format: "Duration: \n%02d:%02d", counter/60, counter%60)
+            if (!timer.isValid){
+                timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(UpdateTimer), userInfo: nil, repeats: true)
+            }
+            print("valid \(timer.isValid)")
             let dateFormatter = DateFormatter()
 //            let intervalFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
@@ -65,10 +77,12 @@ class RecordViewController: UIViewController {
 //            cell.textLabel?.text = dateInFormatted + " - " + dateOutFormatted
             checkInTime.text = "Checked In: \n " + dateInFormatted
             checkInTime.adjustsFontSizeToFitWidth = true
-            elapsedTime.text = "Duration:\n 00:00"
+//            elapsedTime.text = "Duration:\n 00:00"
             elapsedTime.adjustsFontSizeToFitWidth = true
         }else{
             checkInTime.text = "Checked In: \n (have not checked in)"
+            timer.invalidate()
+            counter = 0
             elapsedTime.text = "Duration:\n 00:00"
         }
         if (self.recording){
@@ -100,10 +114,9 @@ class RecordViewController: UIViewController {
                 //store `in` in database
                 self.ref.child("hours/\(String(self.user!.uid))/\(String(describing: numSessions!+1))/in").setValue(`in`)
             }else{ //Just finished recording by clicking the button
-                self.ref.child("hours/\(String(self.user!.uid))/\(String(numSessions!+1))").observeSingleEvent(of: .value, with: { (snapshot) in
+            self.ref.child("hours/\(String(self.user!.uid))/\(String(numSessions!+1))").observeSingleEvent(of: .value, with: { (snapshot) in
                     let value = snapshot.value as? NSDictionary
                     `in` = (value?["in"] as? Int64)!
-//                    print("`in`: \(`in`)")
                     let out = Int64(NSDate().timeIntervalSince1970 * 1000)
                     let interval = out - `in`
                     if (interval > 1800000){
@@ -130,6 +143,7 @@ class RecordViewController: UIViewController {
                 }
             }
             self.updateScreen(self.recording, `in`)
+            print("self.recording when updating screen: \(self.recording)")
         }) { (error) in
             print(error.localizedDescription)
         }
