@@ -17,10 +17,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let user = Auth.auth().currentUser
     var sessions: [Int: Session] = [:]
     
+//    @IBOutlet weak var totalHoursText: UILabel!
+//    @IBOutlet weak var myHoursTableView: UITableView!
+//    @IBOutlet weak var actIndicator2: UIActivityIndicatorView!
+    
     @IBOutlet weak var totalHoursText: UILabel!
-    @IBOutlet weak var myHoursTableView: UITableView!
     @IBOutlet weak var actIndicator2: UIActivityIndicatorView!
-
+    @IBOutlet weak var myHoursTableView: UITableView!
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //normally it would be the length of an array controller.
